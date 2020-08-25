@@ -9,7 +9,7 @@ if (!isset($_SESSION['nombre'])) {
 
 require 'header.php';
 
-if ($_SESSION['ventas']==1) {
+if ($_SESSION['pedidos']==1) {
 
  ?>
     <div class="content-wrapper">
@@ -29,7 +29,7 @@ if ($_SESSION['ventas']==1) {
 <!--box-header-->
 <!--centro-->
 <div class="panel-body table-responsive" id="listadoregistros">
-  <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+<table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
     <thead>
       <th>Opciones</th>
       <th>Fecha Pedido</th>
@@ -126,7 +126,7 @@ if ($_SESSION['ventas']==1) {
          <th></th>
          <th></th>
          <th></th>
-         <th><h4 id="total">€./  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
+         <th><h4 id="total">  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
          
        </tfoot>
        <tbody>

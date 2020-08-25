@@ -10,7 +10,7 @@ function init(){
    });
 
    //cargamos los items al select cliente
-   $.post("../ajax/venta.php?op=selectCliente", function(r){
+   $.post("../ajax/pedidos.php?op=selectCliente", function(r){
    	$("#idcliente").html(r);
    	$('#idcliente').selectpicker('refresh');
    });
@@ -26,7 +26,7 @@ function limpiar(){
 	$("hora_entrega").val("");
 	//$("#impuesto").val("");
 
-	$("#total_venta").val("");
+	$("#total_pedido").val("");
 	$(".filas").remove();
 	$("#total").html("0");
 
@@ -87,7 +87,7 @@ function listar(){
 		],
 		"ajax":
 		{
-			url:'../ajax/venta.php?op=listar',
+			url:'../ajax/pedidos.php?op=listar',
 			type: "get",
 			dataType : "json",
 			error:function(e){
@@ -110,7 +110,7 @@ function listarArticulos(){
 		],
 		"ajax":
 		{
-			url:'../ajax/venta.php?op=listarArticulos',
+			url:'../ajax/pedidos.php?op=listarArticulos',
 			type: "get",
 			dataType : "json",
 			error:function(e){
@@ -129,7 +129,7 @@ function guardaryeditar(e){
      var formData=new FormData($("#formulario")[0]);
 
      $.ajax({
-     	url: "../ajax/venta.php?op=guardaryeditar",
+     	url: "../ajax/pedidos.php?op=guardaryeditar",
      	type: "POST",
      	data: formData,
      	contentType: false,
@@ -145,8 +145,8 @@ function guardaryeditar(e){
      limpiar();
 }
 
-function mostrar(idventa){
-	$.post("../ajax/venta.php?op=mostrar",{idventa : idventa},
+function mostrar(idpedido){
+	$.post("../ajax/pedidos.php?op=mostrar",{idpedido : idpedido},
 		function(data,status)
 		{
 			data=JSON.parse(data);
@@ -162,14 +162,14 @@ function mostrar(idventa){
 			$("#fecha_entrega").val(data.fecha_entrega);
 			$("#observaciones").val(data.observaciones);
 			//$("#impuesto").val(data.impuesto);
-			$("#idventa").val(data.idventa);
+			$("#idpedido").val(data.idpedido);
 			
 			//ocultar y mostrar los botones
 			$("#btnGuardar").hide();
 			$("#btnCancelar").show();
 			$("#btnAgregarArt").hide();
 		});
-	$.post("../ajax/venta.php?op=listarDetalle&id="+idventa,function(r){
+	$.post("../ajax/pedidos.php?op=listarDetalle&id="+idpedido,function(r){
 		$("#detalles").html(r);
 	});
 
@@ -177,10 +177,10 @@ function mostrar(idventa){
 
 
 //funcion para desactivar
-function anular(idventa){
-	bootbox.confirm("�Esta seguro de anular esta Factura?", function(result){
+function anular(idpedido){
+	bootbox.confirm("Esta seguro de anular esta Factura?", function(result){
 		if (result) {
-			$.post("../ajax/venta.php?op=anular", {idventa : idventa}, function(e){
+			$.post("../ajax/pedidos.php?op=anular", {idpedido: idpedido}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
@@ -216,7 +216,7 @@ function agregarDetalle(idarticulo,articulo,precio_venta){
         '<td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td>'+
         '<td><input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
         '<td><input type="number" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+'"></td>'+
-        '<td><input type="number" name="descuento[]" value="'+descuento+'"></td>'+
+       // '<td><input type="number" name="descuento[]" value="'+descuento+'"></td>'+
         '<td><span id="subtotal'+cont+'" name="subtotal">'+subtotal+'</span></td>'+
         '<td><button type="button" onclick="modificarSubtotales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
 		'</tr>';
@@ -233,7 +233,7 @@ function agregarDetalle(idarticulo,articulo,precio_venta){
 function modificarSubtotales(){
 	var cant=document.getElementsByName("cantidad[]");
 	var prev=document.getElementsByName("precio_venta[]");
-	var desc=document.getElementsByName("descuento[]");
+	//var desc=document.getElementsByName("descuento[]");
 	var sub=document.getElementsByName("subtotal");
 
 
@@ -244,7 +244,7 @@ function modificarSubtotales(){
 		var des=desc[i];
 
 
-		inpS.value=(inpV.value*inpP.value)*(1-des.value/100);
+		inpS.value=(inpV.value*inpP.value);
 		document.getElementsByName("subtotal")[i].innerHTML=inpS.value;
 	}
 
@@ -259,7 +259,7 @@ function calcularTotales(){
 		total += document.getElementsByName("subtotal")[i].value;
 	}
 	$("#total").html("€" + total);
-	$("#total_venta").val(total);
+	$("#total_pedido").val(total);
 	evaluar();
 }
 

@@ -149,6 +149,23 @@ if ($_SESSION['ventas']==1) {
 }
         ?>
 
+<?php 
+if ($_SESSION['pedidos']==1) {
+  echo '<li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i> <span>pedidos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pedidos.php"><i class="fa fa-circle-o"></i> pedidos</a></li>
+            <li><a href="cliente.php"><i class="fa fa-circle-o"></i> clientes</a></li>
+          </ul>
+        </li>';
+}
+        ?>
+
                              <?php 
 if ($_SESSION['acceso']==1) {
   echo '  <li class="treeview">
@@ -197,10 +214,10 @@ if ($_SESSION['consultav']==1) {
         </li>';
 }
         ?>     
-            
+            <li><a href="#"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">PDF</small></a></li>
         
-        <li><a href="#"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">PDF</small></a></li>
-        <li><a href="#"><i class="fa  fa-exclamation-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">IT</small></a></li>
+        
+       
       </ul>
     </section>
     <!-- /.sidebar -->

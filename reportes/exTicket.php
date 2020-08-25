@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 //activamos almacenamiento en el buffer
 ob_start();
 if (strlen(session_id())<1) 
@@ -30,11 +30,11 @@ $rspta = $venta->ventacabecera($_GET["id"]);
 $reg=$rspta->fetch_object();
 
 //establecemos los datos de la empresa
-$empresa = "Tecnology S.A.C.";
+$empresa = "CYBERDINE.";
 $documento = "102589524";
-$direccion = "calle los alpes 120";
-$telefono = "854715648";
-$email = "angelinos257@gmail.com";
+$direccion = "Managua, Nicaragua";
+$telefono = "78406547";
+$email = "mafv1976@gmail.com";
 	 ?>
 <div class="zona_impresion">
 	<!--codigo imprimir-->
@@ -90,7 +90,7 @@ $email = "angelinos257@gmail.com";
 		 	echo "<tr>";
 		 	echo "<td>".$regd->cantidad."</td>";
 		 	echo "<td>".$regd->articulo."</td>";
-		 	echo "<td align='right'>S/. ".$regd->subtotal."</td>";
+		 	echo "<td align='right'>C$/. ".$regd->subtotal."</td>";
 		 	echo "</tr>";
 		 	$cantidad+=$regd->cantidad;
 		 } 
@@ -100,7 +100,7 @@ $email = "angelinos257@gmail.com";
 		<tr>
 			<td>&nbsp;</td>
 			<td align="right"><b>TOTAL:</b></td>
-			<td align="right"><b>S/. <?php echo $reg->total_venta; ?></b></td>
+			<td align="right"><b>C$/. <?php echo $reg->total_venta; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">N° de articulos: <?php echo $cantidad; ?> </td>
@@ -112,10 +112,10 @@ $email = "angelinos257@gmail.com";
 			<td colspan="3" align="center">¡Gracias por su compra!</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center">AngshelinoWeb</td>
+			<td colspan="3" align="center">Mario Fornos Web</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center">Arequipa - Peru</td>
+			<td colspan="3" align="center">Managua - Nicaragua</td>
 		</tr>
 	</table>
 	<br>

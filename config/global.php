@@ -16,6 +16,6 @@ define("DB_PASSWORD", "");
 define("DB_ENCODE", "utf8");
 
 //nombre del proyecto
-define("PRO_NOMBRE", "ITVentas");
+define("PRO_NOMBRE", "DIGPLANN");
  
  ?>

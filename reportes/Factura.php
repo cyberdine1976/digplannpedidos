@@ -448,8 +448,8 @@ function addCadreTVAs($letras)
     $this->Line( $r1, $y1+4, $r2, $y1+4);
     $this->SetXY( $r1+9, $y1);
     $this->Cell(10,4, "Total en letras.");
-    $this->SetFont( "Arial", "", 10);
-    $this->SetXY( $r1+10, $y2 - 8 );
+    $this->SetFont( "Arial", "", 8);
+    $this->SetXY( $r1+0, $y2 - 8);
     $this->Cell(6,0, $letras);
 }
 
@@ -468,7 +468,7 @@ function addCadreEurosFrancs($impuesto)
     $this->Cell(35,4, "TOTALES", 0, 0, "C");
     $this->SetFont( "Arial", "", 8);
     $this->SetFont( "Arial", "B", 6);
-    $this->SetXY( $r1, $y1+5 );
+    $this->SetXY( $r1, $y1+5);
     $this->Cell(20,4, "SUBTOTAL", 0, 0, "C");
     $this->SetXY( $r1, $y1+10 );
     $this->Cell(20,4,  $impuesto, 0, 0, "C");
@@ -500,7 +500,7 @@ function addTVAs( $impuesto, $total_venta, $simbolo )
     $this->SetFont('Arial','',8);
     
     
-    $re  = $this->w - 30;
+    $re  = $this->w - 28;
     $rei  = $this->w - 28;
     $rf  = $this->w - 29;
     $y1  = $this->h - 39;
@@ -513,18 +513,18 @@ function addTVAs( $impuesto, $total_venta, $simbolo )
     $length = $this->GetStringWidth( round($total,2) );
     $this->Cell( $length, 2, round($total,2));
     // calculando el igv y mostrando
-    $this->SetXY( $rei, $y1+10 );
-    $length = $this->GetStringWidth( $simbolo );
-    $this->Cell( $length, 2, $simbolo);
-    $igv=$total_venta*0.15;
-    $length = $this->GetStringWidth(round($igv,2) );
-    $this->Cell( $length, 2, round($igv,2));
+    //$this->SetXY( $rei, $y1+10);
+   // $length = $this->GetStringWidth( $simbolo );
+    //$this->Cell( $length, 2, $simbolo);
+   // $igv=$total_venta*0.15;
+   // $length = $this->GetStringWidth(round($igv,2) );
+   // $this->Cell( $length, 2, round($igv,2));
     // mostrando el total
     $this->SetXY( $re, $y1+15 );
     $length = $this->GetStringWidth( $simbolo );
     $this->Cell( $length, 2, $simbolo);
-    $total_venta=$igv+$total_venta;
-    $length = $this->GetStringWidth( $total_venta );
+    $total_venta=$total_venta;
+    $length = $this->GetStringWidth( round ($total_venta,2) );
     $this->Cell( $length, 2, $total_venta);
    
  
