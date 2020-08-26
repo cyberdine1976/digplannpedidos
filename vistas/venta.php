@@ -21,7 +21,7 @@ if ($_SESSION['ventas']==1) {
         <div class="col-md-12">
       <div class="box">
 <div class="box-header with-border">
-  <h1 class="box-title">Ventas <button class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
+  <h1 class="box-title">Pedidos <button class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
   <div class="box-tools pull-right">
     
   </div>
@@ -32,11 +32,14 @@ if ($_SESSION['ventas']==1) {
   <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
     <thead>
       <th>Opciones</th>
-      <th>Fecha</th>
+      <th>Fecha Pedido</th>
+      <th>Fecha Entrega</th>
+      <th>Hora Entrega</th>
       <th>Cliente</th>
       <th>Usuario</th>
       <th>Documento</th>
-      <th>Numero</th>
+      <th>Planta</th>
+      <th>Tipo Vehiculo</th>
       <th>Total Venta</th>
       <th>Estado</th>
     </thead>
@@ -44,11 +47,14 @@ if ($_SESSION['ventas']==1) {
     </tbody>
     <tfoot>
       <th>Opciones</th>
-      <th>Fecha</th>
+      <th>Fecha Pedido</th>
+      <th>Fecha Entrega</th>
+      <th>Hora Entrega</th>
       <th>Cliente</th>
       <th>Usuario</th>
       <th>Documento</th>
-      <th>Numero</th>
+      <th>Planta</th>
+      <th>Tipo Vehiculo</th>
       <th>Total Venta</th>
       <th>Estado</th>
     </tfoot>   
@@ -56,7 +62,7 @@ if ($_SESSION['ventas']==1) {
 </div>
 <div class="panel-body" style="height: 400px;" id="formularioregistros">
   <form action="" name="formulario" id="formulario" method="POST">
-    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+    <div class="form-group col-lg-4 col-md-4 col-xs-12">
       <label for="">Cliente(*):</label>
       <input class="form-control" type="hidden" name="idventa" id="idventa">
       <select name="idcliente" id="idcliente" class="form-control selectpicker" data-live-search="true" required>
@@ -67,7 +73,7 @@ if ($_SESSION['ventas']==1) {
       <label for="">Fecha(*): </label>
       <input class="form-control" type="date" name="fecha_hora" id="fecha_hora" required>
     </div>
-     <div class="form-group col-lg-6 col-md-6 col-xs-12">
+     <div class="form-group col-lg-4 col-md-4 col-xs-12">
       <label for="">Tipo Comprobante(*): </label>
      <select name="tipo_comprobante" id="tipo_comprobante" class="form-control selectpicker" required>
        <option value="Boleta">Boleta</option>
@@ -76,16 +82,20 @@ if ($_SESSION['ventas']==1) {
      </select>
     </div>
      <div class="form-group col-lg-2 col-md-2 col-xs-6">
-      <label for="">Serie: </label>
-      <input class="form-control" type="text" name="serie_comprobante" id="serie_comprobante" maxlength="7" placeholder="Serie">
+      <label for="">Planta: </label>
+      <input class="form-control" type="text" name="planta" id="planta" maxlength="50" placeholder="Planta">
     </div>
      <div class="form-group col-lg-2 col-md-2 col-xs-6">
-      <label for="">Numero: </label>
-      <input class="form-control" type="text" name="num_comprobante" id="num_comprobante" maxlength="10" placeholder="Numero" required>
+      <label for="">Tipo Vehiculo: </label>
+      <input class="form-control" type="text" name="tipo_vehiculo" id="tipo_vehiculo" maxlength="10" placeholder="Vehiculo" required>
+    </div>
+    <div class="form-group col-lg-4 col-md-4 col-xs-6">
+      <label for="">Fecha Entrega: </label>
+      <input class="form-control" type="date" name="fecha_entrega" id="fecha_entrega">
     </div>
     <div class="form-group col-lg-2 col-md-2 col-xs-6">
-      <label for="">Impuesto: </label>
-      <input class="form-control" type="text" name="impuesto" id="impuesto">
+      <label for="">Hora Entrega: </label>
+      <input class="form-control" type="text" name="hora_entrega" id="hora_entrega">
     </div>
     <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
      <a data-toggle="modal" href="#myModal">
@@ -108,7 +118,7 @@ if ($_SESSION['ventas']==1) {
          <th></th>
          <th></th>
          <th></th>
-         <th><h4 id="total">C$./  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
+         <th><h4 id="total"> /  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
        </tfoot>
        <tbody>
          

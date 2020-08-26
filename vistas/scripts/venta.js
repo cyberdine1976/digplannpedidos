@@ -23,8 +23,8 @@ function limpiar(){
 	$("#idcliente").val("");
 	$("#cliente").val("");
 	$("#serie_comprobante").val("");
-	$("#num_comprobante").val("");
-	$("#impuesto").val("");
+	$("#tipo_vehiculo").val("");
+	
 
 	$("#total_venta").val("");
 	$(".filas").remove();
@@ -36,7 +36,8 @@ function limpiar(){
 	var month=("0"+(now.getMonth()+1)).slice(-2);
 	var today=now.getFullYear()+"-"+(month)+"-"+(day);
 	$("#fecha_hora").val(today);
-
+	$("#fecha_entrega").val("");
+	$("#hora_entrega").val("");
 	//marcamos el primer tipo_documento
 	$("#tipo_comprobante").val("Boleta");
 	$("#tipo_comprobante").selectpicker('refresh');
@@ -155,10 +156,11 @@ function mostrar(idventa){
 			$("#idcliente").selectpicker('refresh');
 			$("#tipo_comprobante").val(data.tipo_comprobante);
 			$("#tipo_comprobante").selectpicker('refresh');
-			$("#serie_comprobante").val(data.serie_comprobante);
-			$("#num_comprobante").val(data.num_comprobante);
+			$("#planta").val(data.planta);
+			$("#tipo_vehiculo").val(data.tipo_vehiculo);
 			$("#fecha_hora").val(data.fecha);
-			$("#impuesto").val(data.impuesto);
+			$("#fecha_entrega").val(data.fecha_entrega);
+			$("#hora_entrega").val(data.hora_entrega);
 			$("#idventa").val(data.idventa);
 			
 			//ocultar y mostrar los botones
@@ -175,7 +177,7 @@ function mostrar(idventa){
 
 //funcion para desactivar
 function anular(idventa){
-	bootbox.confirm("¿Esta seguro de anular esta Factura?", function(result){
+	bootbox.confirm("Esta seguro de anular esta Factura?", function(result){
 		if (result) {
 			$.post("../ajax/venta.php?op=anular", {idventa : idventa}, function(e){
 				bootbox.alert(e);
@@ -255,7 +257,7 @@ function calcularTotales(){
 	for (var i = 0; i < sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
 	}
-	$("#total").html("C$" + total);
+	$("#total").html("" + total);
 	$("#total_venta").val(total);
 	evaluar();
 }
