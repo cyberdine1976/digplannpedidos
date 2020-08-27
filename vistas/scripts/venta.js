@@ -38,6 +38,7 @@ function limpiar(){
 	$("#fecha_hora").val(today);
 	$("#fecha_entrega").val("");
 	$("#hora_entrega").val("");
+	$("#observaciones").val("");
 	//marcamos el primer tipo_documento
 	$("#tipo_comprobante").val("Boleta");
 	$("#tipo_comprobante").selectpicker('refresh');
@@ -161,6 +162,7 @@ function mostrar(idventa){
 			$("#fecha_hora").val(data.fecha);
 			$("#fecha_entrega").val(data.fecha_entrega);
 			$("#hora_entrega").val(data.hora_entrega);
+			$("#observaciones").val(data.observaciones);
 			$("#idventa").val(data.idventa);
 			
 			//ocultar y mostrar los botones
@@ -257,7 +259,7 @@ function calcularTotales(){
 	for (var i = 0; i < sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
 	}
-	$("#total").html("" + total);
+	$("#total").html("€."  + total);
 	$("#total_venta").val(total);
 	evaluar();
 }

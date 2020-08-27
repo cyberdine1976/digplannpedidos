@@ -14,6 +14,7 @@ $tipo_vehiculo=isset($_POST["tipo_vehiculo"])? limpiarCadena($_POST["tipo_vehicu
 $fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 $fecha_entrega=isset($_POST["fecha_entrega"])? limpiarCadena($_POST["fecha_entrega"]):"";
 $hora_entrega=isset($_POST["hora_entrega"])? limpiarCadena($_POST["hora_entrega"]):"";
+$observaciones=isset($_POST["observaciones"])? limpiarCadena($_POST["observaciones"]):"";
 //$impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
 $total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):"";
 
@@ -24,7 +25,7 @@ $total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):
 switch ($_GET["op"]) {
 	case 'guardaryeditar':
 	if (empty($idventa)) {
-		$rspta=$venta->insertar($idcliente,$idusuario,$tipo_comprobante,$planta,$tipo_vehiculo,$fecha_hora,$fecha_entrega,$hora_entrega,$total_venta,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_venta"],$_POST["descuento"]); 
+		$rspta=$venta->insertar($idcliente,$idusuario,$tipo_comprobante,$planta,$tipo_vehiculo,$fecha_hora,$fecha_entrega,$hora_entrega,$observaciones,$total_venta,$_POST["idarticulo"],$_POST["cantidad"],$_POST["precio_venta"],$_POST["descuento"]); 
 		echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 	}else{
         
@@ -72,7 +73,7 @@ switch ($_GET["op"]) {
          <th></th>
          <th></th>
          <th></th>
-         <th><h4 id="total"> /. '.$total.'</h4><input type="hidden" name="total_venta" id="total_venta"></th>
+         <th><h4 id="total"> €.  '.$total.'</h4><input type="hidden" name="total_venta" id="total_venta"></th>
        </tfoot>';
 		break;
 
@@ -98,8 +99,9 @@ switch ($_GET["op"]) {
             "6"=>$reg->tipo_comprobante,
 			"7"=>$reg->planta,
 			"8"=>$reg->tipo_vehiculo,
-		    "9"=>$reg->total_venta,
-            "10"=>($reg->estado=='Aceptado')?'<span class="label bg-green">Aceptado</span>':'<span class="label bg-red">Anulado</span>'
+			"9"=>$reg->observaciones,
+		    "10"=>$reg->total_venta,
+            "11"=>($reg->estado=='Aceptado')?'<span class="label bg-green">Aceptado</span>':'<span class="label bg-red">Anulado</span>'
               );
 		}
 		$results=array(

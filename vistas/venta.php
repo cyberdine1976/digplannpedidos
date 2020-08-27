@@ -40,6 +40,7 @@ if ($_SESSION['ventas']==1) {
       <th>Documento</th>
       <th>Planta</th>
       <th>Tipo Vehiculo</th>
+      <th>Observaciones</th>
       <th>Total Venta</th>
       <th>Estado</th>
     </thead>
@@ -55,6 +56,7 @@ if ($_SESSION['ventas']==1) {
       <th>Documento</th>
       <th>Planta</th>
       <th>Tipo Vehiculo</th>
+      <th>Observaciones</th>
       <th>Total Venta</th>
       <th>Estado</th>
     </tfoot>   
@@ -91,22 +93,27 @@ if ($_SESSION['ventas']==1) {
     </div>
     <div class="form-group col-lg-4 col-md-4 col-xs-6">
       <label for="">Fecha Entrega: </label>
-      <input class="form-control" type="date" name="fecha_entrega" id="fecha_entrega">
+      <input class="form-control" type="date" name="fecha_entrega" id="fecha_entrega" required>
     </div>
     <div class="form-group col-lg-2 col-md-2 col-xs-6">
       <label for="">Hora Entrega: </label>
-      <input class="form-control" type="text" name="hora_entrega" id="hora_entrega">
+      <input class="form-control" type="text" name="hora_entrega" id="hora_entrega" required>
     </div>
+    <div class="form-group col-lg-10 col-md-10 col-xs-6">
+      <label for="">Observaciones: </label>
+      <input class="form-control" type="text" name="observaciones" id="observaciones" placeholder="Favor anotar otros horarios de envio..." required>
+    </div>
+  
     <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
      <a data-toggle="modal" href="#myModal">
-       <button id="btnAgregarArt" type="button" class="btn btn-primary"><span class="fa fa-plus"></span>Agregar Articulos</button>
+       <button id="btnAgregarArt" type="button" class="btn btn-primary"><span class="fa fa-plus"></span>Agregar Materiales</button>
      </a>
     </div>
 <div class="form-group col-lg-12 col-md-12 col-xs-12">
      <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
        <thead style="background-color:#A9D0F5">
         <th>Opciones</th>
-        <th>Articulo</th>
+        <th>Materiales</th>
         <th>Cantidad</th>
         <th>Precio Venta</th>
         <th>Descuento</th>
@@ -118,7 +125,7 @@ if ($_SESSION['ventas']==1) {
          <th></th>
          <th></th>
          <th></th>
-         <th><h4 id="total"> /  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
+         <th><h4 id="total"> €.  0.00</h4><input type="hidden" name="total_venta" id="total_venta"></th>
        </tfoot>
        <tbody>
          
@@ -147,7 +154,7 @@ if ($_SESSION['ventas']==1) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Seleccione un Articulo</h4>
+          <h4 class="modal-title">Seleccione los Materiales</h4>
         </div>
         <div class="modal-body">
           <table id="tblarticulos" class="table table-striped table-bordered table-condensed table-hover">

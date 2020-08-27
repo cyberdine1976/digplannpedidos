@@ -41,7 +41,7 @@ $pdf->addSociete(utf8_decode($empresa),
                  utf8_decode("Telefono: ").$telefono."\n".
                  "Email: ".$email,$logo,$ext_logo);
 
-$pdf->fact_dev("$regv->tipo_comprobante ","$regv->serie_comprobante- $regv->num_comprobante");
+$pdf->fact_dev("$regv->tipo_comprobante ","$regv->planta");
 $pdf->temporaire( "" );
 $pdf->addDate($regv->fecha);
 
@@ -95,13 +95,13 @@ $total=$regv->total_venta;
 $V=new EnLetras(); 
 $V->substituir_un_mil_por_mil = true;
 
- $con_letra=strtoupper($V->ValorEnLetras($total," CORDOBAS")); 
+ $con_letra=strtoupper($V->ValorEnLetras($total,"EUROS")); 
 $pdf->addCadreTVAs("---".$con_letra);
 
 
 //mostramos el impuesto
-$pdf->addTVAs( $regv->impuesto, $regv->total_venta, "C$/ ");
-$pdf->addCadreEurosFrancs("IVA"." $regv->impuesto");
+$pdf->addTVAs(  $regv->total_venta,"  ");
+$pdf->addCadreEurosFrancs("IVA");
 $pdf->Output('Reporte de Venta' ,'I');
 
 	}else{

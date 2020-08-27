@@ -495,7 +495,7 @@ function addCadreEurosFrancs($impuesto)
 // invoice = array( "px_unit" => value,
 //                  "qte"     => qte,
 //                  "tva"     => code_tva );
-function addTVAs( $impuesto, $total_venta, $simbolo )
+function addTVAs( $total_venta, $simbolo )
 {
     $this->SetFont('Arial','',8);
     
@@ -516,14 +516,14 @@ function addTVAs( $impuesto, $total_venta, $simbolo )
     $this->SetXY( $rei, $y1+10 );
     $length = $this->GetStringWidth( $simbolo );
     $this->Cell( $length, 2, $simbolo);
-    $igv=$total_venta*0.15;
-    $length = $this->GetStringWidth(round($igv,2) );
-    $this->Cell( $length, 2, round($igv,2));
+    //$igv=$total_venta*0.15;
+    //$length = $this->GetStringWidth(round($igv,2) );
+    //$this->Cell( $length, 2, round($igv,2));
     // mostrando el total
     $this->SetXY( $re, $y1+15 );
     $length = $this->GetStringWidth( $simbolo );
     $this->Cell( $length, 2, $simbolo);
-    $total_venta=$igv+$total_venta;
+    //$total_venta=$igv+$total_venta;
     $length = $this->GetStringWidth( $total_venta );
     $this->Cell( $length, 2, $total_venta);
    
