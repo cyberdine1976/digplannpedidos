@@ -141,12 +141,12 @@ function addSociete( $nom, $adresse, $logo, $ext_logo  )
     $x1 = 30;
     $y1 = 4;
     //Positionnement en bas
-    $this->Image($logo, 5 , 3 , 10, $ext_logo);
+    $this->Image($logo, 5 , 3 , 25 , $ext_logo);
     $this->SetXY( $x1, $y1 );
-    $this->SetFont('Arial','B',14);
+    $this->SetFont('Arial','B',12);
     $length = $this->GetStringWidth( $nom );
-    $this->Cell( $length, 4, $nom);
-    $this->SetXY( $x1, $y1 + 6 );
+    $this->Cell( $length, 2, $nom);
+    $this->SetXY( $x1, $y1 + 4 );
     $this->SetFont('Arial','',10);
     $length = $this->GetStringWidth( $adresse );
     //Coordonnées de la société
@@ -209,7 +209,7 @@ function addDate( $date )
     $this->Line( $r1, $mid, $r2, $mid);
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+3 );
     $this->SetFont( "Arial", "B", 10);
-    $this->Cell(10,5, "Fecha Pedido", 0, 0, "C");
+    $this->Cell(10,5, "FECHA", 0, 0, "C");
     $this->SetXY( $r1 + ($r2-$r1)/2 - 5, $y1+9 );
     $this->SetFont( "Arial", "", 10);
     $this->Cell(10,5,$date, 0,0, "C");
@@ -257,14 +257,14 @@ function addClientAdresse( $cliente, $domicilio ,$num_documento, $email, $telefo
     $y1     = 40;
     $this->SetXY( $r1, $y1);
     $this->SetFont("Arial","B",10);
-    $this->MultiCell( 60, 4, "Cliente:");
-    $this->SetXY( $r1+14, $y1 -1);
+    $this->MultiCell( 60, 4, "CLIENTE");
+    $this->SetXY( $r1, $y1 + 5 );
     $this->SetFont('Arial','',10);
     $length = $this->GetStringWidth( $cliente );
-    $this->Cell( $length, 6, $cliente);
-    $this->SetXY( $r1, $y1 + 6);
+    $this->Cell( $length, 2, $cliente);
+    $this->SetXY( $r1, $y1 + 10 );
     $length = $this->GetStringWidth( $domicilio );
-    $this->Cell( $length, 10, $domicilio);
+    $this->Cell( $length, 2, $domicilio);
     $this->SetXY( $r1, $y1 + 15 );
     $length = $this->GetStringWidth( $num_documento );
     $this->Cell( $length, 2, $num_documento);
