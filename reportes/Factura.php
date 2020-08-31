@@ -252,12 +252,12 @@ function addPageNumber( $page )
 // Client address
 function addClientAdresse( $cliente, $domicilio ,$num_documento, $email, $telefono )
 {
-    $r1     = $this->w - 180;
+    $r1     = $this->w - 190;
     $r2     = $r1 + 68;
     $y1     = 40;
     $this->SetXY( $r1, $y1);
     $this->SetFont("Arial","B",10);
-    $this->MultiCell( 60, 4, "CLIENTE");
+    $this->MultiCell( 60, 3, "DATOS DEL CLIENTE");
     $this->SetXY( $r1, $y1 + 5 );
     $this->SetFont('Arial','',10);
     $length = $this->GetStringWidth( $cliente );
@@ -435,6 +435,18 @@ function addRemarque($remarque)
     $y2  = $y1+5;
     $this->SetXY( $r1 , $y1 );
     $this->Cell($length,4, "Remarque : " . $remarque);
+}
+
+function addObservations($observations)
+{
+    $this->SetFont( "Arial", "", 10);
+    $length = $this->GetStringWidth( "Observaciones : " . $observations );
+    $r1  = 10;
+    $r2  = $r1 + $length;
+    $y1  = $this->h - 45.5;
+    $y2  = $y1+5;
+    $this->SetXY( $r1 , $y1 );
+    $this->Cell($length,4, "Observaciones : " . $observations);
 }
 
 function addCadreTVAs($letras)
