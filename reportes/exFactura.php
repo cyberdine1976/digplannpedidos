@@ -45,7 +45,7 @@ if (!isset($_SESSION['nombre'])) {
       $ext_logo
     );
 
-    $pdf->fact_dev("$regv->tipo_comprobante ", "$regv->planta");
+    $pdf->fact_dev("$regv->tipo_comprobante ", "$regv->idventa");
     $pdf->temporaire("");
     $pdf->addDate(date("d-m-Y", strtotime($regv->fecha)));
 
@@ -89,10 +89,10 @@ if (!isset($_SESSION['nombre'])) {
     $pdf->Cell(0, 0, 'Hora: ' . $regv->hora_entrega, 0, 0, '', false);
     $pdf->SetXY($r1, $y1 + 15);
     $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Planta: ' . $regv->hora_entrega, 0, 0, '', false);
+    $pdf->Cell(0, 0, 'Planta: ' . $regv->planta, 0, 0, '', false);
     $pdf->SetXY($r1, $y1 + 20);
     $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Tipo de vehiculo: ' . $regv->hora_entrega, 0, 0, '', false);
+    $pdf->Cell(0, 0, 'Tipo de vehiculo: ' . $regv->tipo_vehiculo, 0, 0, '', false);
 
     //establecemos las columnas que va tener lña seccion donde mostramos los detalles de la venta
     $cols = array(
