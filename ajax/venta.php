@@ -123,6 +123,65 @@ switch ($_GET["op"]) {
 		}
 		break;
 
+	case 'selectProvincia':
+		require_once "../modelos/Provincia.php";
+		$provincia = new Provincia();
+
+		$rspta = $provincia->listarProvincia();
+
+		while ($reg = $rspta->fetch_object()) {
+			echo '<option value=' . $reg->idprovincia . '>' . $reg->nombre_provincia . '</option>';
+		}
+		break;
+
+	case 'selectCiudad':
+
+		$idProvincia = $_GET['id'];
+
+		require_once "../modelos/Ciudad.php";
+		$ciudad = new Ciudad();
+
+		$rspta = $ciudad->listarCiudad($idProvincia);
+
+		while ($reg = $rspta->fetch_object()) {
+			echo '<option value=' . $reg->idplanta . '>' . $reg->ciudad . '</option>';
+		}
+		break;
+
+	case 'selectTipoVehiculo':
+
+		$idPlanta = $_GET['id'];
+
+		require_once "../modelos/Vehiculo.php";
+		$vehiculo = new Vehiculo();
+
+		$rspta = $vehiculo->listarVehiculo($idPlanta);
+
+		while ($reg = $rspta->fetch_object()) {
+			echo '<option value=' . $reg->idcategoria_vehiculo . '>' . $reg->descripcion . '</option>';
+		}
+		break;
+
+	case 'getFechaHoraDisponibilidad':
+
+		$idCategoriaVehiculo = $_GET['id'];
+
+		require_once "../modelos/Vehiculo.php";
+		$vehiculo = new Vehiculo();
+
+		$rspta = $vehiculo->obtenerFechaHoraDisponible($idCategoriaVehiculo);
+
+		$reg = $rspta->fetch_object();
+
+		$data[] = array(
+			"0" => $reg->fecha_disponible,
+			"1" => $reg->hora_disponible,
+		);
+		
+		echo json_encode($data);
+
+		break;
+
 	case 'listarArticulos':
 		require_once "../modelos/Articulo.php";
 		$articulo = new Articulo();

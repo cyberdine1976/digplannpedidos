@@ -115,6 +115,22 @@ if ($_SESSION['almacen']==1) {
         </li>';
 }
         ?>
+
+<?php 
+if ($_SESSION['planta']==1) {
+  echo ' <li class="treeview">
+          <a href="#">
+            <i class="fa fa-industry"></i> <span>Planta</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="disponibilidad.php"><i class="fa fa-circle-o"></i>Disponibilidad</a></li>
+          </ul>
+        </li>';
+}
+        ?>
                <?php 
 if ($_SESSION['compras']==1) {
   echo ' <li class="treeview">
