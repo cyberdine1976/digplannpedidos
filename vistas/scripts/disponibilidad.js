@@ -2,7 +2,7 @@ var tabla;
 
 //funcion que se ejecuta al inicio
 function init() {
-    mostrarFormularioDisponibilidad(false);
+    mostrarFormularioDisponibilidad(false, "null");
     listarRegistrosDisponibilidad();
 
     $("#formularioDisponibilidad").on("submit", function (e) {
@@ -46,19 +46,20 @@ function cargarSelectProvincia() {
 }
 
 function onChangeSelectProvincia(idProvincia) {
-    $.post("../ajax/disponibilidad.php?op=cargarCiudades&id=" + idProvincia.value, function (r) {
+    $.post("../ajax/disponibilidad.php?op=cargarCiudadesxProvincia&id=" + idProvincia.value, function (r) {
         $("#selectCiudad").html('<option value="0" selected>Seleccione una ciudad</option>');
         $("#selectCiudad").append(r);
         $('#selectCiudad').selectpicker('refresh');
     });
 }
 
-/* function cargarSelectCiudad() {
+function cargarSelectCiudad() {
     $.post("../ajax/disponibilidad.php?op=cargarCiudades", function (r) {
+        $("#selectCiudad").html('<option value="0" selected>Seleccione una ciudad</option>');
         $("#selectCiudad").append(r);
         $('#selectCiudad').selectpicker('refresh');
     });
-} */
+}
 
 function cargarSelectTipoVehiculo() {
     $.post("../ajax/disponibilidad.php?op=cargarTipoDeVehiculos", function (r) {
@@ -68,12 +69,17 @@ function cargarSelectTipoVehiculo() {
 }
 
 function mostrarRegistroDisponibilidad(idDisponibilidad) {
+
+    mostrarFormularioDisponibilidad(true, "editar");
+
     $.post("../ajax/disponibilidad.php?op=mostrar", { iddisponibilidad: idDisponibilidad },
         function (data, status) {
             data = JSON.parse(data);
             console.log('Detalle de registro', data);
 
-            mostrarFormularioDisponibilidad(true);
+            $("#idDisponibilidad").val(data.iddisponibilidad);
+
+            $("#inputIdVenta").val(data.idventa);
 
             $("#selectProvincia").val(data.idprovincia);
             $("#selectProvincia").selectpicker('refresh');
@@ -92,7 +98,6 @@ function mostrarRegistroDisponibilidad(idDisponibilidad) {
         })
 }
 
-
 //funcion para desactivar
 function eliminarRegistroDisponibilidad(idDisponibilidad) {
     bootbox.confirm("¿Esta seguro de eliminar este registro?", function (result) {
@@ -108,7 +113,7 @@ function eliminarRegistroDisponibilidad(idDisponibilidad) {
 
 
 //funcion mostrar formulario 
-function mostrarFormularioDisponibilidad(flag) {
+function mostrarFormularioDisponibilidad(flag, accion) {
     limpiar();
     if (flag) {
         cargarSelectProvincia();
@@ -119,6 +124,18 @@ function mostrarFormularioDisponibilidad(flag) {
         $("#divFormularioDisponibilidad").show();
         $("#btnGuardarDisponibilidad").prop("disabled", false);
         $("#btnAgregarDisponibilidad").hide();
+
+        if (accion == "nuevo") {
+            $("#inputIdVenta").prop("disabled", true);
+            $("#input-pedido").hide();
+        }
+
+        if (accion == "editar") {
+            $("#inputIdVenta").prop("disabled", false);
+            $("#input-pedido").show();
+            cargarSelectCiudad();
+        }
+
     } else {
         $("#listadoDisponibilidad").show();
         $("#divFormularioDisponibilidad").hide();
@@ -129,32 +146,37 @@ function mostrarFormularioDisponibilidad(flag) {
 //cancelar form
 function cancelarFormularioDisponibilidad() {
     limpiar();
-    mostrarFormularioDisponibilidad(false);
+    mostrarFormularioDisponibilidad(false, "null");
 }
 
 //funcion limpiar
 function limpiar() {
+    $("#inputIdVenta").val("");
 
-    $('#selectProvincia').prop('selected', function () {
-        return this.defaultSelected;
-    });
-    //$("#selectProvincia").val(0);
-    $("#selectCiudad").val(0);
-    $("#selectTipoVehiculo").val(0);
+    $("#selectProvincia").html('<option value="0" selected>Seleccione una provincia</option>');
+    $('#selectProvincia').selectpicker('refresh');
+
+    $("#selectCiudad").html('<option value="0" selected>Seleccione una ciudad</option>');
+    $('#selectCiudad').selectpicker('refresh');
+
+    $("#selectTipoVehiculo").html('<option value="0" selected>Seleccione un tipo de vehiculo</option>');
+    $('#selectTipoVehiculo').selectpicker('refresh');
+
     $("#inputFechaDisponible").val("");
     $("#inputHoraDisponible").val("");
+
     $("#selectEstado").val(0);
+    $('#selectEstado').selectpicker('refresh');
 }
 
 //funcion para guardaryeditar
 function guardaryeditar(e) {
     e.preventDefault();//no se activara la accion predeterminada 
     $("#btnGuardarDisponibilidad").prop("disabled", true);
+
     var formData = new FormData($("#formularioDisponibilidad")[0]);
 
-    console.log('Datos a enviar', formData);
-
-    /* $.ajax({
+    $.ajax({
         url: "../ajax/disponibilidad.php?op=guardaryeditar",
         type: "POST",
         data: formData,
@@ -163,12 +185,12 @@ function guardaryeditar(e) {
 
         success: function (datos) {
             bootbox.alert(datos);
-            mostrarFormularioDisponibilidad(false);
+            mostrarFormularioDisponibilidad(false, "null");
             tabla.ajax.reload();
         }
     });
 
-    limpiar(); */
+    limpiar();
 }
 
 init();

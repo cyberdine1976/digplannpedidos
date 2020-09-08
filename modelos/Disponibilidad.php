@@ -23,6 +23,7 @@ class Disponibilidad
 
     public function editar(
         $idDisponibilidad,
+        $idVenta,
         $idProvincia,
         $idPlanta,
         $idCategoriaVehiculo,
@@ -30,7 +31,7 @@ class Disponibilidad
         $horaDisponible,
         $estado
     ) {
-        $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia',idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
+        $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia', idventa='$idVenta',idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
 	            WHERE iddisponibilidad='$idDisponibilidad'";
         return ejecutarConsulta($sql);
     }

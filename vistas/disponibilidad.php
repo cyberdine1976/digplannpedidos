@@ -22,7 +22,7 @@ if (!isset($_SESSION['nombre'])) {
 
                             <!-- Box Header -->
                             <div class="box-header with-border">
-                                <h1 class="box-title">Disponibilidad <button class="btn btn-success" onclick="mostrarFormularioDisponibilidad(true)" id="btnAgregarDisponibilidad"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
+                                <h1 class="box-title">Disponibilidad <button class="btn btn-success" onclick="mostrarFormularioDisponibilidad(true, 'nuevo')" id="btnAgregarDisponibilidad"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
                                 <div class="box-tools pull-right">
 
                                 </div>
@@ -63,6 +63,15 @@ if (!isset($_SESSION['nombre'])) {
 
                             <div class="panel-body" id="divFormularioDisponibilidad">
                                 <form action="" name="formulario" id="formularioDisponibilidad" method="POST">
+                                    <div class="row" id="input-pedido">
+                                        <div class="col-xs-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="formControlSelect1">Nº Pedido</label>
+                                                <input class="form-control" type="hidden" name="iddisponibilidad" id="idDisponibilidad">
+                                                <input class="form-control" type="text" name="idventa" id="inputIdVenta" required>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-xs-6 col-md-4">
                                             <div class="form-group">
@@ -102,7 +111,7 @@ if (!isset($_SESSION['nombre'])) {
                                             <div class="form-group">
                                                 <label for="formControlSelect4">Estado</label>
                                                 <select class="form-control select-picker" name="estado" id="selectEstado" required>
-                                                    <option value="" selected>Seleccione un estado</option>
+                                                    <option value="0" selected>Seleccione un estado</option>
                                                     <option value="Disponible">Disponible</option>
                                                     <option value="Pedido despachado">Pedido despachado</option>
                                                     <option value="Pedido generado">Pedido generado</option>

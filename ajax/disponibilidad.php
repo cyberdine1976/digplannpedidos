@@ -5,6 +5,7 @@ require_once "../modelos/Disponibilidad.php";
 $disponibilidad = new Disponibilidad();
 
 $iddisponibilidad = isset($_POST["iddisponibilidad"]) ? limpiarCadena($_POST["iddisponibilidad"]) : "";
+$idventa = isset($_POST["idventa"]) ? limpiarCadena($_POST["idventa"]) : "";
 $idprovincia = isset($_POST["idprovincia"]) ? limpiarCadena($_POST["idprovincia"]) : "";
 $idplanta = isset($_POST["idplanta"]) ? limpiarCadena($_POST["idplanta"]) : "";
 $idcategoria_vehiculo = isset($_POST["idcategoria_vehiculo"]) ? limpiarCadena($_POST["idcategoria_vehiculo"]) : "";
@@ -13,6 +14,16 @@ $hora_disponible = isset($_POST["hora_disponible"]) ? limpiarCadena($_POST["hora
 $estado = isset($_POST["estado"]) ? limpiarCadena($_POST["estado"]) : "";
 
 switch ($_GET["op"]) {
+
+    case 'guardaryeditar':
+        if (empty($iddisponibilidad)) {
+            $rspta = $disponibilidad->insertar($idprovincia, $idplanta, $idcategoria_vehiculo, $fecha_disponible, $hora_disponible, $estado);
+            echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
+        } else {
+            $rspta = $disponibilidad->editar($iddisponibilidad, $idventa, $idprovincia, $idplanta, $idcategoria_vehiculo, $fecha_disponible, $hora_disponible, $estado);
+            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
+        }
+        break;
 
     case 'listarRegistrosDisponibilidad':
         $rspta = $disponibilidad->listar();
@@ -61,9 +72,21 @@ switch ($_GET["op"]) {
         }
         break;
 
-    case 'cargarCiudades':
+    case 'cargarCiudadesxProvincia':
 
         $idProvincia = $_GET['id'];
+
+        require_once "../modelos/Ciudad.php";
+        $ciudad = new Ciudad();
+
+        $rspta = $ciudad->listarCiudadxProvincia($idProvincia);
+
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value=' . $reg->idplanta . '>' . $reg->ciudad . '</option>';
+        }
+        break;
+
+    case 'cargarCiudades':
 
         require_once "../modelos/Ciudad.php";
         $ciudad = new Ciudad();
