@@ -21,7 +21,7 @@ if (!isset($_SESSION['nombre'])) {
           <div class="col-md-12">
             <div class="box">
               <div class="box-header with-border">
-                <h1 class="box-title">Pedidos <button class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
+                <h1 class="box-title">Pedidos <button id="btnagregar" class="btn btn-success" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>Agregar</button></h1>
                 <div class="box-tools pull-right">
 
                 </div>
@@ -85,15 +85,20 @@ if (!isset($_SESSION['nombre'])) {
                   </div>
 
                   <!-- Seleccionar la disponibilidad (Abrir modal) -->
-                  <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <!-- <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <a data-toggle="modal" href="#modalDisponibilidad">
                       <button onclick="mostrarModalDisponibilidad()" id="btnAgregarDisponibilidad" type="button" class="btn btn-primary"><span class="fa fa-plus"></span>Agregar Disponibilidad</button>
+                    </a>
+                  </div> -->
+                  <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <a data-toggle="modal" href="#modalSeleccionDisponibilidad">
+                      <button id="btnAgregarDisponibilidad" type="button" class="btn btn-primary"><span class="fa fa-plus"></span>Agregar Disponibilidad</button>
                     </a>
                   </div>
 
                   <!-- DataTable -->
                   <div class="form-group col-lg-12 col-md-12 col-xs-12">
-                    <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+                    <table id="detalleSeleccionDisponibilidad" class="table table-striped table-bordered table-condensed table-hover">
                       <thead style="background-color:#A9D0F5">
                         <th>Opciones</th>
                         <th>Provincia</th>
@@ -156,7 +161,7 @@ if (!isset($_SESSION['nombre'])) {
     </div>
 
     <!-- Modal Disponibilidad -->
-    <div class="modal fade" id="modalDisponibilidad" tabindex="-1" role="dialog" aria-labelledby="modalDisponibilidadLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modalDisponibilidad" tabindex="-1" role="dialog" aria-labelledby="modalDisponibilidadLabel" aria-hidden="true">
       <div class="modal-dialog" style="width: 65% !important;">
         <div class="modal-content">
           <div class="modal-header">
@@ -208,7 +213,7 @@ if (!isset($_SESSION['nombre'])) {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Fin Modal Disponibilidad -->
 
     <!--Modal-->
@@ -251,6 +256,47 @@ if (!isset($_SESSION['nombre'])) {
       </div>
     </div>
     <!-- fin Modal-->
+
+    <!-- Modal Seleccion Disponibilidad -->
+    <div class="modal fade" id="modalSeleccionDisponibilidad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="width: 65% !important;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Seleccione los horarios de disponibilidad</h4>
+          </div>
+          <div class="modal-body">
+            <table id="tableSeleccionDisponibilidad" class="table table-striped table-bordered table-condensed table-hover">
+              <thead>
+                <th>Opciones</th>
+                <th>Provincia</th>
+                <th>Ciudad</th>
+                <th>Tipo de vehiculo</th>
+                <th>Fecha disponible</th>
+                <th>Hora disponible</th>
+                <th>Estado</th>
+              </thead>
+              <tbody>
+
+              </tbody>
+              <tfoot>
+                <th>Opciones</th>
+                <th>Provincia</th>
+                <th>Ciudad</th>
+                <th>Tipo de vehiculo</th>
+                <th>Fecha disponible</th>
+                <th>Hora disponible</th>
+                <th>Estado</th>
+              </tfoot>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" type="button" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Modal Seleccion Disponibilidad-->
   <?php
   } else {
     require 'noacceso.php';

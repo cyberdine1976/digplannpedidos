@@ -86,11 +86,14 @@ function mostrarform(flag) {
 		//$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
 		listarArticulos();
+		listarDisponibilidad();
 
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		detalles = 0;
 		$("#btnAgregarArt").show();
+		detalleDisponibilidad = 0;
+		$("#btnAgregarDisponibilidad").show();
 
 
 	} else {
@@ -144,6 +147,29 @@ function listarArticulos() {
 		"ajax":
 		{
 			url: '../ajax/venta.php?op=listarArticulos',
+			type: "get",
+			dataType: "json",
+			error: function (e) {
+				console.log(e.responseText);
+			}
+		},
+		"bDestroy": true,
+		"iDisplayLength": 5,//paginacion
+		"order": [[0, "desc"]]//ordenar (columna, orden)
+	}).DataTable();
+}
+
+function listarDisponibilidad() {
+	tabla = $('#tableSeleccionDisponibilidad').dataTable({
+		"aProcessing": true,//activamos el procedimiento del datatable
+		"aServerSide": true,//paginacion y filrado realizados por el server
+		dom: 'Bfrtip',//definimos los elementos del control de la tabla
+		buttons: [
+
+		],
+		"ajax":
+		{
+			url: '../ajax/venta.php?op=listarDisponibilidadEstadoDisponible',
 			type: "get",
 			dataType: "json",
 			error: function (e) {
@@ -262,6 +288,31 @@ function agregarDetalle(idarticulo, articulo, precio_venta) {
 	}
 }
 
+var contDisponibilidad = 0;
+var detalleDisponibilidad = 0;
+
+function agregarDetalleDisponibilidad(nombreProvincia) {
+	console.log('agregando detalle...', nombreProvincia);
+	/* console.log('agregando detalle...');
+	console.log(idDisponibilidad + nombreProvincia + nombreCiudad + tipoVehiculo + fechaDisponible + horaDisponible);
+	if (idDisponibilidad != "") {
+		var filaDisponibilidad =
+			'<tr class="filasDisponibilidad" id="disponibilidad' + contDisponibilidad + '">' +
+			'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalleDisponibilidad(' + contDisponibilidad + ')">X</button></td>' +
+			'<td><input type="hidden" name="iddisponibilidad[]" value="' + idDisponibilidad + '">' + nombreProvincia + '</td>' +
+			'<td>' + nombreCiudad + '"></td>' +
+			'<td>' + tipoVehiculo + '"></td>' +
+			'<td>' + fechaDisponible + '"></td>' +
+			'<td>' + horaDisponible + '"></td>' +
+			'</tr>';
+		contDisponibilidad++;
+		detalleDisponibilidad++;
+		$('#detalleSeleccionDisponibilidad').append(filaDisponibilidad);
+	} else {
+		alert("Error al ingresar el detalle, revisar los datos de la disponibilidad ");
+	} */
+}
+
 function modificarSubtotales() {
 	var cant = document.getElementsByName("cantidad[]");
 	var prev = document.getElementsByName("precio_venta[]");
@@ -311,6 +362,11 @@ function eliminarDetalle(indice) {
 	calcularTotales();
 	detalles = detalles - 1;
 
+}
+
+function eliminarDetalleDisponibilidad(indice) {
+	$("#disponibilidad" + indice).remove();
+	detalleDisponibilidad = detalleDisponibilidad - 1;
 }
 
 init();

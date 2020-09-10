@@ -56,4 +56,28 @@ class Disponibilidad
         $sql = "SELECT * FROM disponibilidad WHERE iddisponibilidad='$idDisponibilidad'";
         return ejecutarConsultaSimpleFila($sql);
     }
+
+
+    //Consultas para agregar detalle de disponibilidad en el modulo de ventas
+    public function listarDisponibilidadEstadoDisponible()
+    {
+        $sql = "SELECT 
+                    d.iddisponibilidad,
+                    d.idprovincia,
+                    p.nombre_provincia,
+                    d.idplanta,
+                    c.ciudad,
+                    d.idcategoria_vehiculo,
+                    cv.descripcion,
+                    d.fecha_disponible,
+                    d.hora_disponible,
+                    d.estado
+                FROM disponibilidad d 
+                    INNER JOIN provincia p ON p.idprovincia = d.idprovincia
+                    INNER JOIN planta c ON c.idprovincia = p.idprovincia
+                    INNER JOIN categoria_vehiculo cv ON cv.idcategoria_vehiculo = d.idcategoria_vehiculo
+                WHERE d.estado = 'Disponible'
+                GROUP BY d.iddisponibilidad";
+        return ejecutarConsulta($sql);
+    }
 }

@@ -177,7 +177,7 @@ switch ($_GET["op"]) {
 			"0" => $reg->fecha_disponible,
 			"1" => $reg->hora_disponible,
 		);
-		
+
 		echo json_encode($data);
 
 		break;
@@ -198,6 +198,35 @@ switch ($_GET["op"]) {
 				"4" => $reg->stock,
 				"5" => $reg->precio_venta,
 				"6" => "<img src='../files/articulos/" . $reg->imagen . "' height='50px' width='50px'>"
+
+			);
+		}
+		$results = array(
+			"sEcho" => 1, //info para datatables
+			"iTotalRecords" => count($data), //enviamos el total de registros al datatable
+			"iTotalDisplayRecords" => count($data), //enviamos el total de registros a visualizar
+			"aaData" => $data
+		);
+		echo json_encode($results);
+
+		break;
+
+	case 'listarDisponibilidadEstadoDisponible':
+		require_once "../modelos/Disponibilidad.php";
+		$disponibilidad = new Disponibilidad();
+
+		$rspta = $disponibilidad->listarDisponibilidadEstadoDisponible();
+		$data = array();
+
+		while ($reg = $rspta->fetch_object()) {
+			$data[] = array(
+				"0" => '<button class="btn btn-warning" onclick="agregarDetalleDisponibilidad("' . $reg->nombre_provincia . '")"><span class="fa fa-plus"></span></button>',
+				"1" => $reg->nombre_provincia,
+				"2" => $reg->ciudad,
+				"3" => $reg->descripcion,
+				"4" => $reg->fecha_disponible,
+				"5" => $reg->hora_disponible,
+				"6" => $reg->estado
 
 			);
 		}
