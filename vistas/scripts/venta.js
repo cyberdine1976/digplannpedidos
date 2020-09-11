@@ -62,6 +62,8 @@ function limpiar() {
 	$(".filas").remove();
 	$("#total").html("0");
 
+	$(".filasDisponibilidad").remove();
+
 	//obtenemos la fecha actual
 	var now = new Date();
 	var day = ("0" + now.getDate()).slice(-2);
@@ -291,26 +293,28 @@ function agregarDetalle(idarticulo, articulo, precio_venta) {
 var contDisponibilidad = 0;
 var detalleDisponibilidad = 0;
 
-function agregarDetalleDisponibilidad(nombreProvincia) {
-	console.log('agregando detalle...', nombreProvincia);
-	/* console.log('agregando detalle...');
+function agregarDetalleDisponibilidad(idDisponibilidad, nombreProvincia, nombreCiudad, tipoVehiculo, fechaDisponible, horaDisponible) {
+	console.log('agregando detalle...');
 	console.log(idDisponibilidad + nombreProvincia + nombreCiudad + tipoVehiculo + fechaDisponible + horaDisponible);
 	if (idDisponibilidad != "") {
 		var filaDisponibilidad =
 			'<tr class="filasDisponibilidad" id="disponibilidad' + contDisponibilidad + '">' +
 			'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalleDisponibilidad(' + contDisponibilidad + ')">X</button></td>' +
 			'<td><input type="hidden" name="iddisponibilidad[]" value="' + idDisponibilidad + '">' + nombreProvincia + '</td>' +
-			'<td>' + nombreCiudad + '"></td>' +
-			'<td>' + tipoVehiculo + '"></td>' +
-			'<td>' + fechaDisponible + '"></td>' +
-			'<td>' + horaDisponible + '"></td>' +
+			'<td>' + nombreCiudad + '</td>' +
+			'<td>' + tipoVehiculo + '</td>' +
+			'<td>' + fechaDisponible + '</td>' +
+			'<td>' + horaDisponible + '</td>' +
 			'</tr>';
 		contDisponibilidad++;
 		detalleDisponibilidad++;
 		$('#detalleSeleccionDisponibilidad').append(filaDisponibilidad);
+
+		var IDs = document.getElementsByName("iddisponibilidad[]");
+		console.log("IDs Obtenidos", IDs);
 	} else {
 		alert("Error al ingresar el detalle, revisar los datos de la disponibilidad ");
-	} */
+	}
 }
 
 function modificarSubtotales() {

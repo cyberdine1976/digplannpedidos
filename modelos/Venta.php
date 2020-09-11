@@ -11,7 +11,7 @@ class Venta
 	}
 
 	//metodo insertar registro
-	public function insertar($idcliente, $idusuario, $tipo_comprobante, $planta, $tipo_vehiculo, $fecha_hora, $fecha_entrega, $hora_entrega, $observaciones, $total_venta, $idarticulo, $cantidad, $precio_venta, $descuento)
+	public function insertar($idcliente, $idusuario, $tipo_comprobante, $planta, $tipo_vehiculo, $fecha_hora, $fecha_entrega, $hora_entrega, $observaciones, $total_venta, $idarticulo, $cantidad, $precio_venta, $descuento, $iddisponibilidad)
 	{
 		$sql = "INSERT INTO venta (idcliente,idusuario,tipo_comprobante,planta,tipo_vehiculo,fecha_hora,fecha_entrega,hora_entrega,observaciones,total_venta,estado) VALUES ('$idcliente','$idusuario','$tipo_comprobante','$planta','$tipo_vehiculo','$fecha_hora','$fecha_entrega','$hora_entrega','$observaciones','$total_venta','Aceptado')";
 		//return ejecutarConsulta($sql);
@@ -26,7 +26,24 @@ class Venta
 
 			$num_elementos = $num_elementos + 1;
 		}
-		return $sw;
+
+		$num_disponibilidad = 0;
+		$ud = true;
+		while ($num_disponibilidad < count($iddisponibilidad)) {
+
+			$sql_disponibilidad = "UPDATE disponibilidad d SET d.idventa='$idventanew', d.estado='Pedido generado' WHERE d.iddisponibilidad='$iddisponibilidad[$num_disponibilidad]'";
+			
+			ejecutarConsulta($sql_disponibilidad) or $ud = false;
+
+			$num_disponibilidad = $num_disponibilidad + 1;
+		}
+
+		if ($sw && $ud) {
+			$registro = true;
+		} else {
+			$registro = false;
+		}
+		return $registro;
 	}
 
 	public function anular($idventa)

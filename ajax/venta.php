@@ -25,7 +25,7 @@ $total_venta = isset($_POST["total_venta"]) ? limpiarCadena($_POST["total_venta"
 switch ($_GET["op"]) {
 	case 'guardaryeditar':
 		if (empty($idventa)) {
-			$rspta = $venta->insertar($idcliente, $idusuario, $tipo_comprobante, $planta, $tipo_vehiculo, $fecha_hora, $fecha_entrega, $hora_entrega, $observaciones, $total_venta, $_POST["idarticulo"], $_POST["cantidad"], $_POST["precio_venta"], $_POST["descuento"]);
+			$rspta = $venta->insertar($idcliente, $idusuario, $tipo_comprobante, $planta, $tipo_vehiculo, $fecha_hora, $fecha_entrega, $hora_entrega, $observaciones, $total_venta, $_POST["idarticulo"], $_POST["cantidad"], $_POST["precio_venta"], $_POST["descuento"], $_POST["iddisponibilidad"]);
 			echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 		} else {
 		}
@@ -220,7 +220,7 @@ switch ($_GET["op"]) {
 
 		while ($reg = $rspta->fetch_object()) {
 			$data[] = array(
-				"0" => '<button class="btn btn-warning" onclick="agregarDetalleDisponibilidad("' . $reg->nombre_provincia . '")"><span class="fa fa-plus"></span></button>',
+				"0" => '<button class="btn btn-warning" onclick="agregarDetalleDisponibilidad(' . $reg->iddisponibilidad . ',\'' . $reg->nombre_provincia . '\',\''  . $reg->ciudad . '\',\'' . $reg->descripcion . '\',\'' . $reg->fecha_disponible . '\',\'' . $reg->hora_disponible . '\'' . ')"><span class="fa fa-plus"></span></button>',
 				"1" => $reg->nombre_provincia,
 				"2" => $reg->ciudad,
 				"3" => $reg->descripcion,
