@@ -32,7 +32,7 @@ class Venta
 		while ($num_disponibilidad < count($iddisponibilidad)) {
 
 			$sql_disponibilidad = "UPDATE disponibilidad d SET d.idventa='$idventanew', d.estado='Pedido generado' WHERE d.iddisponibilidad='$iddisponibilidad[$num_disponibilidad]'";
-			
+
 			ejecutarConsulta($sql_disponibilidad) or $ud = false;
 
 			$num_disponibilidad = $num_disponibilidad + 1;
@@ -83,6 +83,20 @@ class Venta
 	public function ventadetalles($idventa)
 	{
 		$sql = "SELECT a.nombre AS articulo, a.codigo, d.cantidad, d.precio_venta, d.descuento, (d.cantidad*d.precio_venta-d.descuento) AS subtotal FROM detalle_venta d INNER JOIN articulo a ON d.idarticulo=a.idarticulo WHERE d.idventa='$idventa'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function disponibilidaddetalle($idventa)
+	{
+		$sql = "SELECT 
+					p.ciudad,
+					ct.descripcion,
+					d.fecha_disponible,
+					d.hora_disponible
+				FROM disponibilidad d 
+					INNER JOIN planta p ON p.idplanta = d.idplanta
+					INNER JOIN categoria_vehiculo ct ON ct.idcategoria_vehiculo = d.idcategoria_vehiculo
+				WHERE d.idventa ='$idventa'";
 		return ejecutarConsulta($sql);
 	}
 }

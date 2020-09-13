@@ -58,41 +58,7 @@ if (!isset($_SESSION['nombre'])) {
       utf8_decode("Teléfono: ") . $regv->telefono
     );
 
-    //Observacion del cliente
-    /* $or1  = $pdf->GetPageWidth() - 200;
-    $or2  = $or1 + 115;
-    $oy1  = 15;
-    $oy2  = $oy1 ;
-    $omid = $oy1 + ($oy2 / 2);
-    $pdf->RoundedRect($or1, $oy1+55, ($or2 - $or1), $oy2, 3.5, 'D');
-    $pdf->Line( $or1, $omid+55, $or2, $omid+55);
-    $pdf->SetXY($or1, $oy1+55 );
-    $pdf->SetFont( "Arial", "B", 10);
-    $pdf->Cell(($or2 - $or1), $oy2-5, "OBSERVACIONES", 0, 0, "C");
-    $pdf->SetXY($or1, $oy1+60);
-    $pdf->SetFont("Arial", "B", 10);
-    $pdf->MultiCell(($or2 - $or1), $oy2-5, '', 0, 0, '', false); */
-
-
     $pdf->addObservations($regv->observaciones);
-    // Celdas para el detalle de entrega
-    $r1 = $pdf->GetPageWidth() - 80;
-    $y1 = 42;
-    $pdf->SetXY($r1, $y1);
-    $pdf->SetFont("Arial", "B", 10);
-    $pdf->Cell(0, 0, 'DETALLE DE ENTREGA', 0, 0, '', false);
-    $pdf->SetXY($r1, $y1 + 5);
-    $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Fecha: ' . date("d-m-Y", strtotime($regv->fecha_entrega)), 0, 0, '', false);
-    $pdf->SetXY($r1, $y1 + 10);
-    $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Hora: ' . $regv->hora_entrega, 0, 0, '', false);
-    $pdf->SetXY($r1, $y1 + 15);
-    $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Planta: ' . $regv->planta, 0, 0, '', false);
-    $pdf->SetXY($r1, $y1 + 20);
-    $pdf->SetFont("Arial", "", 10);
-    $pdf->Cell(0, 0, 'Tipo de vehiculo: ' . $regv->tipo_vehiculo, 0, 0, '', false);
 
     //establecemos las columnas que va tener lña seccion donde mostramos los detalles de la venta
     $cols = array(
@@ -149,6 +115,78 @@ if (!isset($_SESSION['nombre'])) {
     //mostramos el impuesto
     $pdf->addTVAs($regv->total_venta, "  ");
     $pdf->addCadreEurosFrancs("IVA");
+
+    //Segunda página para el detalle de la disponibilidad
+    $pdf->AddPage();
+
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetY(10);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->Cell(0, 5, 'HORARIOS SELECCIONADOS', 0, 0, 'C');
+    $pdf->SetDrawColor(0, 0, 0);
+    $pdf->SetLineWidth(1);
+    $pdf->Line(65, $pdf->GetY() + 7, 145, $pdf->GetY() + 7);
+
+    $pdf->SetY(25);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetLineWidth(0);
+    $widthColumn = $pdf->GetPageWidth() / 4;
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->SetFillColor(153, 153, 255);
+    $pdf->Cell($widthColumn, 10, 'PLANTA', 0, 0, 'C', 1);
+    $pdf->Cell($widthColumn, 10, 'TIPO DE VEHICULO', 0, 0, 'C', 1);
+    $pdf->Cell($widthColumn - 10, 10, 'FECHA', 0, 0, 'C', 1);
+    $pdf->Cell($widthColumn - 10, 10, 'HORA', 0, 0, 'C', 1);
+    $pdf->Ln();
+
+    //obtenemos todos los detalles del a venta actual
+    $resultadoDisponibilidadDetalle = $venta->disponibilidaddetalle($_GET["id"]);
+
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->SetFillColor(224, 224, 224);
+    while ($registro = $resultadoDisponibilidadDetalle->fetch_object()) {
+      $pdf->Cell($widthColumn, 10, $registro->ciudad, 'B', 0, 'C', 1);
+      $pdf->Cell($widthColumn, 10, $registro->descripcion, 'B', 0, 'C', 1);
+      $pdf->Cell($widthColumn - 10, 10, $registro->fecha_disponible, 'B', 0, 'C', 1);
+      $pdf->Cell($widthColumn - 10, 10, $registro->hora_disponible, 'B', 0, 'C', 1);
+      $pdf->Ln();
+    }
+
+    /* $pdf->SetLineWidth(0.5);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetDrawColor(80, 80, 80);
+    $total = 0;
+    foreach ($order_details as $detail) {
+      $fpdf->Cell(60, 10, $detail->product_name, 'B', 0, 'C', 1);
+      $fpdf->Cell(60, 10, $detail->description, 'B', 0, 'C', 1);
+      $fpdf->Cell(20, 10, SetCurrency(doubleval($detail->unit_price)), 'B', 0, 'C', 1);
+      $fpdf->Cell(20, 10, doubleval($detail->quantity), 'B', 0, 'C', 1);
+      $fpdf->Cell(30, 10, SetCurrency($detail->unit_price * $detail->quantity), 'B', 0, 'C', 1);
+      $fpdf->Ln();
+      $total += $detail->unit_price * $detail->quantity;
+    } */
+
+    // Celdas para el detalle de entrega
+    /*  $r1 = $pdf->GetPageWidth() - 80;
+    $y1 = 42;
+    $pdf->SetXY($r1, $y1);
+    $pdf->SetFont("Arial", "B", 10);
+    $pdf->Cell(0, 0, 'DETALLE DE ENTREGA', 0, 0, '', false);
+    $pdf->SetXY($r1, $y1 + 5);
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->Cell(0, 0, 'Fecha: ' . date("d-m-Y", strtotime($regv->fecha_entrega)), 0, 0, '', false);
+    $pdf->SetXY($r1, $y1 + 10);
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->Cell(0, 0, 'Hora: ' . $regv->hora_entrega, 0, 0, '', false);
+    $pdf->SetXY($r1, $y1 + 15);
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->Cell(0, 0, 'Planta: ' . $regv->planta, 0, 0, '', false);
+    $pdf->SetXY($r1, $y1 + 20);
+    $pdf->SetFont("Arial", "", 10);
+    $pdf->Cell(0, 0, 'Tipo de vehiculo: ' . $regv->tipo_vehiculo, 0, 0, '', false); */
+
+
     $pdf->Output('Reporte de Venta', 'I');
   } else {
     echo "No tiene permiso para visualizar el reporte";
