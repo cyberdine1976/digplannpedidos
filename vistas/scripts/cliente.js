@@ -19,6 +19,8 @@ function limpiar(){
 	$("#telefono").val("");
 	$("#email").val("");
 	$("#idpersona").val("");
+	$("#ciudad").val("");
+	$("#provincia").val("");
 }
 
 //funcion mostrar formulario 
@@ -106,6 +108,8 @@ function mostrar(idpersona){
 			$("#telefono").val(data.telefono);
 			$("#email").val(data.email);
 			$("#idpersona").val(data.idpersona);
+			$("#provincia").val(data.ciudad);
+			$("#ciudad").val(data.ciudad);
 		})
 }
 

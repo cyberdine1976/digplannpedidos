@@ -30,54 +30,65 @@ if ($_SESSION['ventas']==1) {
     <thead>
       <th>Opciones</th>
       <th>Nombre</th>
-      <th>Documento</th>
-      <th>Numero</th>
+      <th>Tipo persona</th>
+      <th>Numero NIF</th>
       <th>Telefono</th>
       <th>Email</th>
+      <th>Ciudad</th>
+      <th>Provincia</th>
     </thead>
     <tbody>
     </tbody>
     <tfoot>
       <th>Opciones</th>
       <th>Nombre</th>
-      <th>Documento</th>
-      <th>Numero</th>
+      <th>Tipo persona</th>
+      <th>Numero NIF</th>
       <th>Telefono</th>
       <th>Email</th>
+      <th>Ciudad</th>
+      <th>Provincia</th>
     </tfoot>   
   </table>
 </div>
 <div class="panel-body" style="height: 400px;" id="formularioregistros">
   <form action="" name="formulario" id="formulario" method="POST">
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Nombre</label>
+      <label for="">Nombre de la empresa</label>
       <input class="form-control" type="hidden" name="idpersona" id="idpersona">
       <input class="form-control" type="hidden" name="tipo_persona" id="tipo_persona" value="Cliente">
       <input class="form-control" type="text" name="nombre" id="nombre" maxlength="100" placeholder="Nombre del cliente" required>
     </div>
      <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Tipo Dcumento</label>
-     <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
-       <option value="DNI">DNI</option>
-       <option value="RUC">RUC</option>
-       <option value="CEDULA">CEDULA</option>
+      <label for="">Tipo persona</label>
+      <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
+       <option value="Proveedor">Proveedor</option>
+       <option value="Cliente">Cliente</option>
      </select>
     </div>
      <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Número Documento</label>
-      <input class="form-control" type="text" name="num_documento" id="num_documento" maxlength="20" placeholder="Número de Documento">
+      <label for="">Número Documento NIF</label>
+      <input class="form-control" type="text" name="num_documento" id="num_documento" maxlength="20" placeholder="NIF">
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Direccion</label>
+      <label for="">Dirección de oficina</label>
       <input class="form-control" type="text" name="direccion" id="direccion" maxlength="70" placeholder="Direccion">
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Telefono</label>
       <input class="form-control" type="text" name="telefono" id="telefono" maxlength="20" placeholder="Número de Telefono">
     </div>
-        <div class="form-group col-lg-6 col-md-6 col-xs-12">
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Email</label>
       <input class="form-control" type="email" name="email" id="email" maxlength="50" placeholder="Email">
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+      <label for="">Ciudad</label>
+      <input class="form-control" type="text" name="ciudad" id="ciudad" maxlength="20" placeholder="Ciudad">
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+      <label for="">Provincia</label>
+      <input class="form-control" type="provincia" name="provincia" id="provincia" maxlength="50" placeholder="Provincia">
     </div>
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Guardar</button>

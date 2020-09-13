@@ -11,14 +11,16 @@ $num_documento=isset($_POST["num_documento"])? limpiarCadena($_POST["num_documen
 $direccion=isset($_POST["direccion"])? limpiarCadena($_POST["direccion"]):"";
 $telefono=isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
 $email=isset($_POST["email"])? limpiarCadena($_POST["email"]):"";
+$ciudad=isset($_POST["ciudad"])? limpiarCadena($_POST["ciudad"]):"";
+$provincia=isset($_POST["provincia"])? limpiarCadena($_POST["provincia"]):"";
 
 switch ($_GET["op"]) {
 	case 'guardaryeditar':
 	if (empty($idpersona)) {
-		$rspta=$persona->insertar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email);
+		$rspta=$persona->insertar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email,$ciudad, $provincia);
 		echo $rspta ? "Datos registrados correctamente" : "No se pudo registrar los datos";
 	}else{
-         $rspta=$persona->editar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email);
+         $rspta=$persona->editar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion,$telefono,$email,$ciudad, $provincia);
 		echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos";
 	}
 		break;
@@ -40,13 +42,15 @@ switch ($_GET["op"]) {
 
 		while ($reg=$rspta->fetch_object()) {
 			$data[]=array(
-            "0"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
-            "1"=>$reg->nombre,
-            "2"=>$reg->tipo_documento,
-            "3"=>$reg->num_documento,
-            "4"=>$reg->telefono,
-            "5"=>$reg->email
-              );
+				"0"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
+				"1"=>$reg->nombre,
+				"2"=>$reg->tipo_documento,
+				"3"=>$reg->num_documento,
+				"4"=>$reg->telefono,
+				"5"=>$reg->email,
+				"6"=>$reg->ciudad,
+				"7"=>$reg->provincia
+            );
 		}
 		$results=array(
              "sEcho"=>1,//info para datatables
@@ -62,13 +66,15 @@ switch ($_GET["op"]) {
 
 		while ($reg=$rspta->fetch_object()) {
 			$data[]=array(
-            "0"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
-            "1"=>$reg->nombre,
-            "2"=>$reg->tipo_documento,
-            "3"=>$reg->num_documento,
-            "4"=>$reg->telefono,
-            "5"=>$reg->email
-              );
+				"0"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
+				"1"=>$reg->nombre,
+				"2"=>$reg->tipo_documento,
+				"3"=>$reg->num_documento,
+				"4"=>$reg->telefono,
+				"5"=>$reg->email,
+				"6"=>$reg->ciudad,
+				"7"=>$reg->provincia
+			);
 		}
 		$results=array(
              "sEcho"=>1,//info para datatables

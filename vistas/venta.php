@@ -73,14 +73,13 @@ if (!isset($_SESSION['nombre'])) {
                   </div>
                   <div class="form-group col-lg-4 col-md-4 col-xs-12">
                     <label for="">Fecha(*): </label>
-                    <input class="form-control" type="date" name="fecha_hora" id="fecha_hora" required>
+                    <input class="form-control" type="date" name="fecha_hora" id="fecha_hora" required readonly>
                   </div>
                   <div class="form-group col-lg-4 col-md-4 col-xs-12">
                     <label for="">Tipo Comprobante(*): </label>
                     <select name="tipo_comprobante" id="tipo_comprobante" class="form-control selectpicker" required>
-                      <option value="Boleta">Boleta</option>
                       <option value="Factura">Factura</option>
-                      <option value="Ticket">Ticket</option>
+                      <option value="Albaran">Albaran</option>
                     </select>
                   </div>
 
