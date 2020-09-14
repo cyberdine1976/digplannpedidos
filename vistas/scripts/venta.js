@@ -121,7 +121,13 @@ function listar() {
 			'copyHtml5',
 			'excelHtml5',
 			'csvHtml5',
-			'pdf'
+			{
+				extend: 'pdf',
+				orientation: 'landscape',
+                exportOptions: {
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                }
+            }
 		],
 		"ajax":
 		{

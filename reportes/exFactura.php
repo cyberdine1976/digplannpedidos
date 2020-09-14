@@ -186,7 +186,7 @@ if (!isset($_SESSION['nombre'])) {
     $pdf->SetFont("Arial", "", 10);
     $pdf->Cell(0, 0, 'Tipo de vehiculo: ' . $regv->tipo_vehiculo, 0, 0, '', false); */
 
-
+    ob_end_clean();
     $pdf->Output('Reporte de Venta', 'I');
   } else {
     echo "No tiene permiso para visualizar el reporte";

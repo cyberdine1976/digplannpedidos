@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.0.1
     </div>
-    <strong>Copyright &copy; 2019-2020 <a target="_blank" href="">Mario Fornos</a>.</strong> Todo los derechos
+    <strong>Copyright &copy; 2019-2020 <a target="_blank" href="">Grupo ITESP </a>.</strong> Todo los derechos
     reservados.
   </footer>
 
