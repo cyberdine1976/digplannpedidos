@@ -36,6 +36,8 @@ if ($_SESSION['almacen']==1) {
       <th>Imagen</th>
       <th>Descripcion</th>
       <th>Estado</th>
+      <th>Uso</th>
+      <th>Fórmula</th>
     </thead>
     <tbody>
     </tbody>
@@ -48,6 +50,8 @@ if ($_SESSION['almacen']==1) {
       <th>Imagen</th>
       <th>Descripcion</th>
       <th>Estado</th>
+      <th>Uso</th>
+      <th>Fórmula</th>
     </tfoot>   
   </table>
 </div>
@@ -66,7 +70,7 @@ if ($_SESSION['almacen']==1) {
       <label for="">Stock</label>
       <input class="form-control" type="number" name="stock" id="stock"  required>
     </div>
-       <div class="form-group col-lg-6 col-md-6 col-xs-12">
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
       <label for="">Descripcion</label>
       <input class="form-control" type="text" name="descripcion" id="descripcion" maxlength="256" placeholder="Descripcion">
     </div>
@@ -84,6 +88,14 @@ if ($_SESSION['almacen']==1) {
       <div id="print">
         <svg id="barcode"></svg>
       </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+      <label for="">Uso</label>
+      <input class="form-control" type="text" name="uso" id="uso" maxlength="256" placeholder="Uso">
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-xs-12">
+      <label for="">Fórmula</label>
+      <input class="form-control" type="text" name="formula" id="formula" maxlength="256" placeholder="Fórmula">
     </div>
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Guardar</button>

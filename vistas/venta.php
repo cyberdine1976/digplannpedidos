@@ -217,7 +217,7 @@ if (!isset($_SESSION['nombre'])) {
 
     <!--Modal-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" style="width: 65% !important;">
+      <div class="modal-dialog" style="width: 70% !important;">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -233,6 +233,8 @@ if (!isset($_SESSION['nombre'])) {
                 <th>Stock</th>
                 <th>Precio Venta</th>
                 <th>Imagen</th>
+                <th>Uso</th>
+                <th>Fórmula</th>
               </thead>
               <tbody>
 
@@ -245,6 +247,8 @@ if (!isset($_SESSION['nombre'])) {
                 <th>Stock</th>
                 <th>Precio Venta</th>
                 <th>Imagen</th>
+                <th>Uso</th>
+                <th>Fórmula</th>
               </tfoot>
             </table>
           </div>

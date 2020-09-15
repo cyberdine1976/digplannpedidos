@@ -19,6 +19,8 @@ function init(){
 
 //funcion limpiar
 function limpiar(){
+	$("#uso").val("");
+	$("#formula").val("");
 	$("#codigo").val("");
 	$("#nombre").val("");
 	$("#descripcion").val("");
@@ -116,6 +118,8 @@ function mostrar(idarticulo){
 			$("#imagenmuestra").attr("src","../files/articulos/"+data.imagen);
 			$("#imagenactual").val(data.imagen);
 			$("#idarticulo").val(data.idarticulo);
+			$("#uso").val(data.uso);
+			$("#formula").val(data.formula);
 			generarbarcode();
 		})
 }

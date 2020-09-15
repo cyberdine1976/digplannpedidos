@@ -197,7 +197,9 @@ switch ($_GET["op"]) {
 				"3" => $reg->codigo,
 				"4" => $reg->stock,
 				"5" => $reg->precio_venta,
-				"6" => "<img src='../files/articulos/" . $reg->imagen . "' height='50px' width='50px'>"
+				"6" => "<img src='../files/articulos/" . $reg->imagen . "' height='50px' width='50px'>",
+				"7" => $reg->uso,
+				"8" => $reg->formula
 
 			);
 		}
