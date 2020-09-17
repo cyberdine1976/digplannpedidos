@@ -30,7 +30,7 @@ if ($_SESSION['ventas']==1) {
     <thead>
       <th>Opciones</th>
       <th>Nombre</th>
-      <th>Tipo persona</th>
+      <th>Tipo documento</th>
       <th>Numero NIF</th>
       <th>Telefono</th>
       <th>Email</th>
@@ -42,7 +42,7 @@ if ($_SESSION['ventas']==1) {
     <tfoot>
       <th>Opciones</th>
       <th>Nombre</th>
-      <th>Tipo persona</th>
+      <th>Tipo documento</th>
       <th>Numero NIF</th>
       <th>Telefono</th>
       <th>Email</th>
@@ -60,10 +60,9 @@ if ($_SESSION['ventas']==1) {
       <input class="form-control" type="text" name="nombre" id="nombre" maxlength="100" placeholder="Nombre del cliente" required>
     </div>
      <div class="form-group col-lg-6 col-md-6 col-xs-12">
-      <label for="">Tipo persona</label>
-      <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
-       <option value="Proveedor">Proveedor</option>
-       <option value="Cliente">Cliente</option>
+      <label for="">Tipo documento</label>
+      <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required readonly>
+       <option value="NIF">NIF</option>
      </select>
     </div>
      <div class="form-group col-lg-6 col-md-6 col-xs-12">

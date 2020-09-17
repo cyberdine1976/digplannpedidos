@@ -61,8 +61,9 @@ if (strlen(session_id())<1)
                 <img src="../files/usuarios/<?php echo $_SESSION['imagen']; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  Mario Fornos-Desarrollo de software
-                  <small>2018-2020</small>
+                  <span class="hidden-xs"><?php echo $_SESSION['nombre']; ?></span>
+                  
+                  <small><span class="hidden-xs"><?php echo $_SESSION['login']; ?></span></small>
                 </p>
               </li>
               <!-- Menu Footer-->
