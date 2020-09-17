@@ -130,10 +130,11 @@ if (!isset($_SESSION['nombre'])) {
     $pdf->SetY(25);
     $pdf->SetFont('Arial', '', 10);
     $pdf->SetLineWidth(0);
-    $widthColumn = $pdf->GetPageWidth() / 4;
+    $widthColumn = $pdf->GetPageWidth() / 5;
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetFillColor(153, 153, 255);
-    $pdf->Cell($widthColumn, 10, 'PLANTA', 0, 0, 'C', 1);
+    $pdf->Cell($widthColumn, 10, 'PROVINCIA', 0, 0, 'C', 1);
+    $pdf->Cell($widthColumn, 10, 'CIUDAD', 0, 0, 'C', 1);
     $pdf->Cell($widthColumn, 10, 'TIPO DE VEHICULO', 0, 0, 'C', 1);
     $pdf->Cell($widthColumn - 10, 10, 'FECHA', 0, 0, 'C', 1);
     $pdf->Cell($widthColumn - 10, 10, 'HORA', 0, 0, 'C', 1);
@@ -145,6 +146,7 @@ if (!isset($_SESSION['nombre'])) {
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetFillColor(224, 224, 224);
     while ($registro = $resultadoDisponibilidadDetalle->fetch_object()) {
+      $pdf->Cell($widthColumn, 10, $registro->nombre_provincia, 'B', 0, 'C', 1);
       $pdf->Cell($widthColumn, 10, $registro->ciudad, 'B', 0, 'C', 1);
       $pdf->Cell($widthColumn, 10, $registro->descripcion, 'B', 0, 'C', 1);
       $pdf->Cell($widthColumn - 10, 10, $registro->fecha_disponible, 'B', 0, 'C', 1);

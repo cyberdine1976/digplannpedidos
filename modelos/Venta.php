@@ -89,11 +89,13 @@ class Venta
 	public function disponibilidaddetalle($idventa)
 	{
 		$sql = "SELECT 
+					pp.nombre_provincia,
 					p.ciudad,
 					ct.descripcion,
 					d.fecha_disponible,
 					d.hora_disponible
 				FROM disponibilidad d 
+					INNER JOIN provincia pp ON pp.idprovincia = d.idprovincia
 					INNER JOIN planta p ON p.idplanta = d.idplanta
 					INNER JOIN categoria_vehiculo ct ON ct.idcategoria_vehiculo = d.idcategoria_vehiculo
 				WHERE d.idventa ='$idventa'";
