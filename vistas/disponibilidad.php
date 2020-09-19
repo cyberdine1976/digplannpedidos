@@ -68,7 +68,7 @@ if (!isset($_SESSION['nombre'])) {
                                             <div class="form-group">
                                                 <label for="formControlSelect1">Nº Pedido</label>
                                                 <input class="form-control" type="hidden" name="iddisponibilidad" id="idDisponibilidad">
-                                                <input class="form-control" type="text" name="idventa" id="inputIdVenta" required>
+                                                <input class="form-control" type="number" name="idventa" id="inputIdVenta">
                                             </div>
                                         </div>
                                     </div>

@@ -31,8 +31,15 @@ class Disponibilidad
         $horaDisponible,
         $estado
     ) {
-        $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia', idventa='$idVenta',idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
+        if(empty(trim($idVenta))) {
+            $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia', idventa=NULL,idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
 	            WHERE iddisponibilidad='$idDisponibilidad'";
+        } else {
+            $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia', idventa='$idVenta',idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
+	            WHERE iddisponibilidad='$idDisponibilidad'";
+        }
+        /* $sql = "UPDATE disponibilidad SET idprovincia='$idProvincia', idventa='$idVenta',idplanta='$idPlanta',idcategoria_vehiculo='$idCategoriaVehiculo',fecha_disponible='$fechaDisponible',hora_disponible='$horaDisponible',estado='$estado' 
+	            WHERE iddisponibilidad='$idDisponibilidad'"; */
         return ejecutarConsulta($sql);
     }
 
@@ -81,6 +88,3 @@ class Disponibilidad
         return ejecutarConsulta($sql);
     }
 }
-
-
-
