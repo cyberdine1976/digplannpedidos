@@ -216,7 +216,7 @@ if ($_SESSION['consultav']==1) {
         ?>     
             
         
-        <li><a href="#"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">PDF</small></a></li>
+        <li><a href="../public/ayuda.pdf" target="_blank"><i class="fa fa-question-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">PDF</small></a></li>
         <li><a href="#"><i class="fa  fa-exclamation-circle"></i> <span>Ayuda</span><small class="label pull-right bg-yellow">IT</small></a></li>
       </ul>
     </section>
